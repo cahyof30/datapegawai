@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/pegawai.dart';
-import 'pegawai_detail.dart';
 import 'pegawai_page.dart';
-import '../model/pasien.dart';
-import 'pasien_detail.dart';
 import 'pasien_page.dart';
 
 class MenuPage extends StatefulWidget {

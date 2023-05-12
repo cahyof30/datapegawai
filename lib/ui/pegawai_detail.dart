@@ -19,7 +19,7 @@ class _PegawaiDetailState extends State<PegawaiDetail> {
         children: [
           SizedBox(height: 10),
           Text(
-            "No. Induk Pegawai : ${widget.pegawai.nipPegawai}",
+            "NIP : ${widget.pegawai.nipPegawai}",
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 10),
