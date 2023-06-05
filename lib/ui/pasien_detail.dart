@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pasien_update_form.dart';
 import '../model/pasien.dart';
 
 class PasienDetail extends StatefulWidget {
@@ -46,19 +47,32 @@ class _PasienDetailState extends State<PasienDetail> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  child: const Text("Ubah")),
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  child: const Text("Hapus")),
+              _tombolUbah(),
+              _tombolHapus(),
             ],
           )
         ],
       ),
     );
+  }
+
+  _tombolUbah() {
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PasienUpdateForm(pasien: widget.pasien)));
+        },
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+        child: const Text("Ubah"));
+  }
+
+  _tombolHapus() {
+    return ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+        child: const Text("Hapus"));
   }
 }
