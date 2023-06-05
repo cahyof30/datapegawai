@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widget/sidebar.dart';
 import '../model/pegawai.dart';
 import 'pegawai_item.dart';
 import 'pegawai_form.dart';
+import '../widget/sidebar.dart';
 
 class PegawaiPage extends StatefulWidget {
   const PegawaiPage({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class _PegawaiPageState extends State<PegawaiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Sidebar(),
       appBar: AppBar(
         title: const Text("Data Pegawai"),
         actions: [

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import '../model/pegawai.dart';
 import '/ui/pegawai_detail.dart';
 
-class PegawaiForm extends StatefulWidget {
-  const PegawaiForm({Key? key}) : super(key: key);
-  _PegawaiFormState createState() => _PegawaiFormState();
+class PegawaiUpdateForm extends StatefulWidget {
+  final Pegawai pegawai;
+
+  const PegawaiUpdateForm({Key? key, required this.pegawai}) : super(key: key);
+
+  @override
+  _PegawaiUpdateFormState createState() => _PegawaiUpdateFormState();
 }
 
-class _PegawaiFormState extends State<PegawaiForm> {
+class _PegawaiUpdateFormState extends State<PegawaiUpdateForm> {
   final _formKey = GlobalKey<FormState>();
   final _namaPegawaiCtrl = TextEditingController();
   final _nipPegawaiCtrl = TextEditingController();
@@ -17,9 +21,28 @@ class _PegawaiFormState extends State<PegawaiForm> {
   final _pwPegawaiCtrl = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _namaPegawaiCtrl.text = widget.pegawai.namaPegawai;
+    });
+  }
+
+  @override
+  void dispose() {
+    _namaPegawaiCtrl.dispose();
+    _nipPegawaiCtrl.dispose();
+    _tglPegawaiCtrl.dispose();
+    _nohpPegawaiCtrl.dispose();
+    _emailPegawaiCtrl.dispose();
+    _pwPegawaiCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Pegawai")),
+      appBar: AppBar(title: const Text("Ubah Pegawai")),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -34,8 +57,6 @@ class _PegawaiFormState extends State<PegawaiForm> {
               _fieldNohpPegawai(),
               SizedBox(height: 20),
               _fieldEmailPegawai(),
-              SizedBox(height: 20),
-              _fieldPwPegawai(),
               SizedBox(height: 20),
               _tombolSimpan(),
             ],
@@ -98,14 +119,13 @@ class _PegawaiFormState extends State<PegawaiForm> {
           emailPegawai: _emailPegawaiCtrl.text,
           pwPegawai: _pwPegawaiCtrl.text,
         );
+        Navigator.pop(context);
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PegawaiDetail(pegawai: pegawai),
-          ),
-        );
+            context,
+            MaterialPageRoute(
+                builder: (context) => PegawaiDetail(pegawai: pegawai)));
       },
-      child: const Text("Simpan"),
+      child: const Text("Simpan Perubahan"),
     );
   }
 }
