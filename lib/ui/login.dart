@@ -1,4 +1,7 @@
+import '../service/login_service.dart';
 import 'package:flutter/material.dart';
+
+import 'beranda.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,16 +18,18 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
-            child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Login Admin",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
-              SizedBox(height: 50),
-              Center(
-                child: Form(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Login Admin",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: 50),
+                Center(
+                  child: Form(
                     key: _formKey,
                     child: Container(
                       width: MediaQuery.of(context).size.width / 1.3,
@@ -37,11 +42,13 @@ class _LoginState extends State<Login> {
                           _tombolLogin(),
                         ],
                       ),
-                    )),
-              )
-            ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
@@ -63,7 +70,39 @@ class _LoginState extends State<Login> {
 
   Widget _tombolLogin() {
     return Container(
-        width: MediaQuery.of(context).size.width,
-        child: ElevatedButton(child: Text("Login"), onPressed: () {}));
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        child: Text("Login"),
+        onPressed: () async {
+          String username = _usernameCtrl.text;
+          String password = _passwordCtrl.text;
+          await LoginService().login(username, password).then((value) {
+            if (value == true) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Beranda()),
+              );
+            } else {
+              AlertDialog alertDialog = AlertDialog(
+                content: const Text("Username atau Password Tidak Valid"),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("OK"),
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                  ),
+                ],
+              );
+              showDialog(
+                context: context,
+                builder: (context) => alertDialog,
+              );
+            }
+          });
+        },
+      ),
+    );
   }
 }
