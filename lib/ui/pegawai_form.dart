@@ -25,9 +25,9 @@ class _PegawaiFormState extends State<PegawaiForm> {
           key: _formKey,
           child: Column(
             children: [
-              _fieldNamaPegawai(),
-              SizedBox(height: 20),
               _fieldNipPegawai(),
+              SizedBox(height: 20),
+              _fieldNamaPegawai(),
               SizedBox(height: 20),
               _fieldTglPegawai(),
               SizedBox(height: 20),
@@ -45,17 +45,17 @@ class _PegawaiFormState extends State<PegawaiForm> {
     );
   }
 
-  _fieldNamaPegawai() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: "Nama Pegawai"),
-      controller: _namaPegawaiCtrl,
-    );
-  }
-
   _fieldNipPegawai() {
     return TextFormField(
       decoration: const InputDecoration(labelText: "Nomor Induk Pegawai"),
       controller: _nipPegawaiCtrl,
+    );
+  }
+
+  _fieldNamaPegawai() {
+    return TextFormField(
+      decoration: const InputDecoration(labelText: "Nama Pegawai"),
+      controller: _namaPegawaiCtrl,
     );
   }
 
@@ -90,7 +90,7 @@ class _PegawaiFormState extends State<PegawaiForm> {
   _tombolSimpan() {
     return ElevatedButton(
       onPressed: () {
-        Pegawai pegawai = new Pegawai(
+        Pegawai pegawai = Pegawai(
           namaPegawai: _namaPegawaiCtrl.text,
           nipPegawai: _nipPegawaiCtrl.text,
           tglPegawai: _tglPegawaiCtrl.text,

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import '../model/pasien.dart';
+import '../service/pasien_service.dart';
 import 'pasien_item.dart';
 import 'pasien_form.dart';
 import '../widget/sidebar.dart';
 
 class PasienPage extends StatefulWidget {
   const PasienPage({Key? key}) : super(key: key);
-
-  @override
   State<PasienPage> createState() => _PasienPageState();
 }
 
 class _PasienPageState extends State<PasienPage> {
+  Stream<List<Pasien>> getList() async* {
+    List<Pasien> data = await PasienService().listData();
+    yield data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,36 +32,29 @@ class _PasienPageState extends State<PasienPage> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          GestureDetector(
-            child: (PasienItem(
-                pasien: Pasien(
-                    no_rmPasien: "121",
-                    namaPasien: "Muhammad Fajar Kurnia",
-                    tglPasien: "12 Mei 1999",
-                    nohpPasien: "08882312XXXX",
-                    alamatPasien: "Klitren, Gondokusuman, Yogyakarta"))),
-          ),
-          GestureDetector(
-            child: (PasienItem(
-                pasien: Pasien(
-                    no_rmPasien: "122",
-                    namaPasien: "Indah Setiani Dewi",
-                    tglPasien: "12 September 2001",
-                    nohpPasien: "08881212XXXX",
-                    alamatPasien: "Balirejo, Yogyakarta"))),
-          ),
-          GestureDetector(
-            child: (PasienItem(
-                pasien: Pasien(
-                    no_rmPasien: "123",
-                    namaPasien: "Agus Setiabudi",
-                    tglPasien: "3 Agustus 1987",
-                    nohpPasien: "08123157XXXX",
-                    alamatPasien: "Kasihan, Bantul"))),
-          ),
-        ],
+      body: StreamBuilder(
+        stream: getList(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (!snapshot.hasData &&
+              snapshot.connectionState == ConnectionState.done) {
+            return Text('Data Kosong');
+          }
+
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return PasienItem(pasien: snapshot.data[index]);
+            },
+          );
+        },
       ),
     );
   }

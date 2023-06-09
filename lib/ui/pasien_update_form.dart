@@ -13,7 +13,7 @@ class PasienUpdateForm extends StatefulWidget {
 
 class _PasienUpdateFormState extends State<PasienUpdateForm> {
   final _formKey = GlobalKey<FormState>();
-  final _no_rmPasienCtrl = TextEditingController();
+  final _normPasienCtrl = TextEditingController();
   final _namaPasienCtrl = TextEditingController();
   final _tglPasienCtrl = TextEditingController();
   final _nohpPasienCtrl = TextEditingController();
@@ -29,7 +29,7 @@ class _PasienUpdateFormState extends State<PasienUpdateForm> {
 
   @override
   void dispose() {
-    _no_rmPasienCtrl.dispose();
+    _normPasienCtrl.dispose();
     _namaPasienCtrl.dispose();
     _tglPasienCtrl.dispose();
     _nohpPasienCtrl.dispose();
@@ -67,7 +67,7 @@ class _PasienUpdateFormState extends State<PasienUpdateForm> {
   _fieldNo_rmPasien() {
     return TextFormField(
       decoration: const InputDecoration(labelText: "No. Ruang Pasien"),
-      controller: _no_rmPasienCtrl,
+      controller: _normPasienCtrl,
     );
   }
 
@@ -102,8 +102,8 @@ class _PasienUpdateFormState extends State<PasienUpdateForm> {
   _tombolSimpan() {
     return ElevatedButton(
       onPressed: () {
-        Pasien pasien = new Pasien(
-          no_rmPasien: _no_rmPasienCtrl.text,
+        Pasien pasien = Pasien(
+          normPasien: _normPasienCtrl.text,
           namaPasien: _namaPasienCtrl.text,
           tglPasien: _tglPasienCtrl.text,
           nohpPasien: _nohpPasienCtrl.text,

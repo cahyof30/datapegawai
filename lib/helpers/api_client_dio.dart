@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 final Dio dio = Dio(BaseOptions(
     baseUrl: 'http://localhost:8080/klinik-api/',
-    // baseUrl: 'https://647d929daf9847108549e499.mockapi.io/',
     connectTimeout: 5000,
     receiveTimeout: 3000));
 

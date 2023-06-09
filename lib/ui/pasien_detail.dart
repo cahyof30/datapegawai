@@ -20,7 +20,7 @@ class _PasienDetailState extends State<PasienDetail> {
         children: [
           SizedBox(height: 10),
           Text(
-            "No. Ruang : ${widget.pasien.no_rmPasien}",
+            "No. Ruang : ${widget.pasien.normPasien}",
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 10),
