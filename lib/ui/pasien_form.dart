@@ -9,7 +9,7 @@ class PasienForm extends StatefulWidget {
 
 class _PasienFormState extends State<PasienForm> {
   final _formKey = GlobalKey<FormState>();
-  final _no_rmPasienCtrl = TextEditingController();
+  final _normPasienCtrl = TextEditingController();
   final _namaPasienCtrl = TextEditingController();
   final _tglPasienCtrl = TextEditingController();
   final _nohpPasienCtrl = TextEditingController();
@@ -24,7 +24,7 @@ class _PasienFormState extends State<PasienForm> {
           key: _formKey,
           child: Column(
             children: [
-              _fieldNo_rmPasien(),
+              _fieldNormPasien(),
               SizedBox(height: 20),
               _fieldNamaPasien(),
               SizedBox(height: 20),
@@ -42,10 +42,10 @@ class _PasienFormState extends State<PasienForm> {
     );
   }
 
-  _fieldNo_rmPasien() {
+  _fieldNormPasien() {
     return TextFormField(
       decoration: const InputDecoration(labelText: "No. Ruang Pasien"),
-      controller: _no_rmPasienCtrl,
+      controller: _normPasienCtrl,
     );
   }
 
@@ -81,7 +81,7 @@ class _PasienFormState extends State<PasienForm> {
     return ElevatedButton(
       onPressed: () {
         Pasien pasien = Pasien(
-          no_rmPasien: _no_rmPasienCtrl.text,
+          normPasien: _normPasienCtrl.text,
           namaPasien: _namaPasienCtrl.text,
           tglPasien: _tglPasienCtrl.text,
           nohpPasien: _nohpPasienCtrl.text,
